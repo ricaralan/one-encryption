@@ -1,0 +1,35 @@
+{
+  "name": "one-encryption",
+  "version": "1.0.0",
+  "description": "Helper encryption build with crypto",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricaralan/one-encryption.git"
+  },
+  "keywords": [
+    "encryption",
+    "encrypt",
+    "cipher",
+    "decipher",
+    "helper",
+    "crypto",
+    "decrypt",
+    "encryptation",
+    "cryptography",
+    "encode",
+    "decode"
+  ],
+  "author": "Alan Olivares",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ricaralan/one-encryption/issues"
+  },
+  "homepage": "https://github.com/ricaralan/one-encryption#readme",
+  "dependencies": {
+    "crypto": "0.0.3"
+  }
+}
