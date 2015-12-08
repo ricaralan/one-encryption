@@ -1,6 +1,6 @@
 {
   "name": "one-encryption",
-  "version": "1.0.0",
+  "version": "2.3.1",
   "description": "Helper encryption build with crypto",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,10 @@
     "encryptation",
     "cryptography",
     "encode",
+    "ssl",
+    "openssl",
+    "openssl encryptation",
+    "ssl encryptation",
     "decode"
   ],
   "author": "Alan Olivares",

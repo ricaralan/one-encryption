@@ -1,39 +1,59 @@
 /**
 *	This module help to cipher and decipher
 *
-*	@version 1.0.0
+*	@version 2.3.1
 *	@author Alan Olivares
 */
 
 module.exports = function() {
 
 	var crypto = require("crypto"),
-		configEncriptacion = require("./ConfigEncriptation");
+		configEncriptation  = require("./ConfigEncriptation");
 
-	this.cipher = function(word) {
+	this.encrypt = function(params, word) {
+		initConfig(params, word);
 		try {
-			var cipher 	 = crypto.createCipher(
-				configEncriptacion.openSSLCipherAlgorithm,
-				configEncriptacion.key);
-			var wordCipher  = cipher.update(word, "utf8", "hex");
-			wordCipher 	  += cipher.final("hex");
+			var cipher			 = crypto.createCipher(
+				configEncriptation.openSSLCipherAlgorithm,
+				configEncriptation.key);
+			var wordCipher   = cipher.update(configEncriptation.word, "utf8", "hex");
+			wordCipher 	    += cipher.final("hex");
 		} catch(e) {
-			console.log("ERROR CIPHER: " + e.message, word);
+			console.log("ERROR CIPHER: " + e.message, configEncriptation.word);
 		}
 		return wordCipher;
 	};
 
-	this.decipher = function(wordToDecipher) {
+	this.decrypt = function(params, wordToDecipher) {
+		initConfig(params, wordToDecipher);
 		try {
-			var decipher = crypto.createDecipher(
-				configEncriptacion.openSSLCipherAlgorithm,
-				configEncriptacion.key);
-			var wordDecipher  = decipher.update(wordToDecipher, "hex", "utf8");
-			wordDecipher	 += decipher.final("utf8");
+			var decipher     = crypto.createDecipher(
+				configEncriptation.openSSLCipherAlgorithm,
+				configEncriptation.key);
+			var wordDecipher = decipher.update(configEncriptation.word, "hex", "utf8");
+			wordDecipher	+= decipher.final("utf8");
 		} catch(e) {
-			console.log("ERROR DECIPHER: " + e.message, wordToDecipher);
+			console.log("ERROR DECIPHER: " + e.message, configEncriptation.word);
 		}
 		return wordDecipher;
 	};
+
+	function initConfig(params, word) {
+		if(params && params instanceof Object) {
+			setConfig(params);
+			configEncriptation.word = word;
+		} else {
+			configEncriptation.word = params;
+		}
+	}
+
+	function setConfig(params) {
+		setDataIfExist("openSSLCipherAlgorithm", params, "algorithm");
+		setDataIfExist("key", params, "key");
+	}
+
+	function setDataIfExist(posConfig, json, posJson) {
+		configEncriptation[posConfig] = (json instanceof Object && json[posJson] != undefined) ? json[posJson] : configEncriptation[posConfig];
+	}
 
 }

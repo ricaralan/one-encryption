@@ -1,5 +1,6 @@
 /**
 *	Encriptation test
+*
 *	@author Alan Olivares
 */
 
@@ -8,13 +9,28 @@ var assert	= require("assert"),
 
 encriptation = new Encriptation();
 word = "hola mundo!";
-wordEncript = encriptation.cipher(word);
+// Simple test
+wordEncript = encriptation.encrypt(word);
 
 assert.notEqual(word, wordEncript);
 
-assert.equal(wordEncript, encriptation.cipher(word));
+assert.equal(wordEncript, encriptation.encrypt(word));
 
-assert.equal(word, encriptation.decipher(wordEncript));
+assert.equal(word, encriptation.decrypt(wordEncript));
 
+// Custom test
 
-console.log("Success test!", wordEncript);
+config = {
+	algorithm : "aes-128-cbc",
+	key : "[Secret key]"
+};
+
+wordEncript = encriptation.encrypt(config, word);
+
+assert.notEqual(word, wordEncript);
+
+assert.equal(wordEncript, encriptation.encrypt(config, word));
+
+assert.equal(word, encriptation.decrypt(config, wordEncript));
+
+console.log("Success test!", wordEncript, word);
