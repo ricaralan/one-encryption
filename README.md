@@ -28,9 +28,10 @@ Usage - step 2 "Simple usage"
 
 ```
 
-Usage - step 3 "Custom usage"
-You can customize the algorithm and encryption key
-  Algorithm: You need have openssl installed in your SO and choose any available algorithm
+Usage - step 3 "Custom usage" <br/>
+You can customize the algorithm and encryption key <br/>
+  Algorithm: You need have openssl installed in your SO and choose any available algorithm <br/>
+  Example algorithm: <br/>
   Encryption key: You can use any word or key for example "masterkey"
 
 ```shell
