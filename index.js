@@ -1,7 +1,7 @@
 /**
 *	This module help to cipher and decipher
 *
-*	@version 2.3.1
+*	@version 2.4.1
 *	@author Alan Olivares
 */
 
