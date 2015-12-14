@@ -9,7 +9,7 @@
 
 var crypto = require('crypto');
 var OneEncryption = function() {
-  this.config = require('./ConfigEncriptation');
+  this._config = require('./ConfigEncriptation');
 };
 
 /**
@@ -23,12 +23,12 @@ OneEncryption.prototype.encrypt = function(params, word) {
   this._initConfig(params, word);
   try {
     var cipher			 = crypto.createCipher(
-      this.config.openSSLCipherAlgorithm,
-      this.config.key);
-    var wordCipher   = cipher.update(this.config.word, 'utf8', 'hex');
+      this._config.openSSLCipherAlgorithm,
+      this._config.key);
+    var wordCipher   = cipher.update(this._config.word, 'utf8', 'hex');
     wordCipher 	    += cipher.final('hex');
   } catch(e) {
-    console.log('ERROR CIPHER: ' + e.message, this.config.word);
+    console.log('ERROR CIPHER: ' + e.message, this._config.word);
   }
 
   return wordCipher;
@@ -45,12 +45,12 @@ OneEncryption.prototype.decrypt = function(params, wordToDecipher) {
   this._initConfig(params, wordToDecipher);
   try {
     var decipher     = crypto.createDecipher(
-      this.config.openSSLCipherAlgorithm,
-      this.config.key);
-    var wordDecipher = decipher.update(this.config.word, 'hex', 'utf8');
+      this._config.openSSLCipherAlgorithm,
+      this._config.key);
+    var wordDecipher = decipher.update(this._config.word, 'hex', 'utf8');
     wordDecipher	+= decipher.final('utf8');
   } catch(e) {
-    console.log('ERROR DECIPHER: ' + e.message, this.config.word);
+    console.log('ERROR DECIPHER: ' + e.message, this._config.word);
   }
 
   return wordDecipher;
@@ -59,9 +59,9 @@ OneEncryption.prototype.decrypt = function(params, wordToDecipher) {
 OneEncryption.prototype._initConfig = function(params, word) {
   if(params && params instanceof Object) {
     this._setConfig(params);
-    this.config.word = word;
+    this._config.word = word;
   } else {
-    this.config.word = params;
+    this._config.word = params;
   }
 }
 
@@ -71,7 +71,7 @@ OneEncryption.prototype._setConfig = function(params) {
 }
 
 OneEncryption.prototype._setDataIfExist = function(posConfig, json, posJson) {
-  this.config[posConfig] = (json instanceof Object && json[posJson] != undefined) ? json[posJson] : this.config[posConfig];
+  this._config[posConfig] = (json instanceof Object && json[posJson] != undefined) ? json[posJson] : this._config[posConfig];
 }
 
 module.exports = OneEncryption;
