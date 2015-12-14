@@ -1,6 +1,6 @@
 {
   "name": "one-encryption",
-  "version": "2.4.1",
+  "version": "2.7.1",
   "description": "Helper encryption build with crypto",
   "main": "index.js",
   "scripts": {

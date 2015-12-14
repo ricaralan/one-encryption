@@ -4,11 +4,12 @@
 *	@author Alan Olivares
 */
 
-var assert	= require("assert"),
-	Encriptation = require("../");
+var assert	= require('assert');
+var Encriptation = require('../');
+var word = 'hola mundo!';
 
 encriptation = new Encriptation();
-word = "hola mundo!";
+
 // Simple test
 wordEncript = encriptation.encrypt(word);
 
@@ -18,11 +19,13 @@ assert.equal(wordEncript, encriptation.encrypt(word));
 
 assert.equal(word, encriptation.decrypt(wordEncript));
 
+console.log('Success test!', wordEncript, word);
+
 // Custom test
 
 config = {
-	algorithm : "aes-128-cbc",
-	key : "[Secret key]"
+	algorithm : 'camellia-256-ofb',
+	key : '[Secret key]'
 };
 
 wordEncript = encriptation.encrypt(config, word);
@@ -33,4 +36,4 @@ assert.equal(wordEncript, encriptation.encrypt(config, word));
 
 assert.equal(word, encriptation.decrypt(config, wordEncript));
 
-console.log("Success test!", wordEncript, word);
+console.log('Success test!', wordEncript, word);
